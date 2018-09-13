@@ -1,0 +1,55 @@
+package com.example.calculator;
+
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.GridView;
+import android.widget.ListView;
+
+public class MainActivity extends AppCompatActivity {
+
+    String subject[] = {"C/C++","Java","Android","IOS"};
+    Button btnGrid, btnList;
+    GridView grid;
+    ListView list;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        btnGrid = findViewById(R.id.btnGrid);
+        btnList = findViewById(R.id.btnList);
+        grid = (GridView) findViewById(R.id.grid);
+        list = (ListView) findViewById(R.id.list);
+
+        ArrayAdapter arrayAdapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1,subject);
+        list.setAdapter(arrayAdapter);
+        grid.setAdapter(arrayAdapter);
+
+        btnGrid.setVisibility(View.GONE);
+        list.setVisibility(View.GONE);
+
+        btnList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                btnGrid.setVisibility(View.VISIBLE);
+                list.setVisibility(View.VISIBLE);
+                btnList.setVisibility(View.GONE);
+                grid.setVisibility(View.GONE);
+            }
+        });
+
+        btnGrid.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                btnList.setVisibility(View.VISIBLE);
+                grid.setVisibility(View.VISIBLE);
+                btnGrid.setVisibility(View.GONE);
+                list.setVisibility(View.GONE);
+            }
+        });
+    }
+}
